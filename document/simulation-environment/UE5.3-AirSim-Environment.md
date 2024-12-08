@@ -21,7 +21,7 @@
 
 注意在安装时注意勾选必要的组件，这里由于项目原因，和文档不一样的是选用 win 10 SDK 19041 版本
 
-![](image-3.png)
+![](./assets-of-UE5.3-AirSim-Environment/image-3.png)
 
 ****
 
@@ -34,7 +34,7 @@
 这里建议把目录中的 sln 后缀一个 .backup 后缀，然后右键 UE5 工程产生新的解决方案 sln
 文件，然后覆盖掉原来的 sln 文件
 
-![](image-2.png)
+![](./assets-of-UE5.3-AirSim-Environment/image-2.png)
 
 之后在编译解决方案时选用这个编译器
 
@@ -42,7 +42,7 @@
 然后这个 Plugins 文件夹非常重要，可以把它复制到任何一个虚幻引擎的工程中，这样就可以使用 AirSim 插件了
 
 但是直接把 Plugins 文件夹复制到其他 UE 项目中可能还需要配置其他东西，为了节省大家的精力，大家直接学习 UE 操作逻辑在原有的 UE 项目中进行场景搭建即可
-![](image-1.png)
+![](./assets-of-UE5.3-AirSim-Environment/image-1.png)
 ## 5. 之后就可以参考上级链接进行 AirSim API 和 UE5 的基础学习
 
 
