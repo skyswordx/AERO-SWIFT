@@ -1,5 +1,12 @@
 # UE5.3-AirSim-环境搭建
-## 1. 下载 UE5 安装包
+
+## 0. 装好 AirSim 的工程
+
+我们这边已经准备好了一个在 windows 端配置好的 AirSim 工程，会在第一次开会完分好工之后用移动硬盘拷给搭建仿真环境制作接口的小组（30 个 g）
+
+由于 AirSim 已经停止开发了，所以目前支持到 UE5.3 的，所以需要安装 UE5.3 的开发环境
+
+## 1. 下载 UE 引擎安装包
 
 
 下载的流程参考官方文档：[最强大的实时3D创作工具 - Unreal Engine](https://www.unrealengine.com/zh-CN/download)
