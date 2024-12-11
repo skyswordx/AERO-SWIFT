@@ -31,8 +31,8 @@ FOR IARC
 ## 🤫 资料区
 
 - [x]  [UE5.3-AirSim仿真环境搭建](./document/simulation-environment/UE5.3-AirSim-Environment.md)  关于 UE 5.3-AirSim 仿真环境搭建过程
-+ 无人机跟随参考的项目：[Elastic-Tracker] 相关的总结
-	+ [ ] [Elastic-Tracker 环境搭建](./document/Elastic-Tracker-Setup/Elastic-Tracker-Setup.md)  
++ 无人机跟随参考的项目：[Elastic-Tracker](https://github.com/ZJU-FAST-Lab/Elastic-Tracker) 相关的总结
+	+ [ ] [Elastic-Tracker 环境搭建问题总结](./document/Elastic-Tracker-Setup/Elastic-Tracker-Setup.md)  
 + 组网相关的关键词：batman mesh 
 + 集群通信和规划参考的项目：[ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm) 
 
