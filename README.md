@@ -30,7 +30,7 @@ FOR IARC
 
 ## 🤫 资料区
 
-- 快速入门无人机基础知识的链接：[无人机系统 - 高飞组超全讲解](https://www.bilibili.com/video/BV1Jq4y1T7QD/?spm_id_from=333.337.search-card.all.click&vd_source=9c85d181a345808c304a6fa2780bb4da)
+- 快速入门无人机基础知识的链接：[无人机软硬件科普](https://www.bilibili.com/video/BV1Jq4y1T7QD?spm_id_from=333.788.videopod.episodes&vd_source=9c85d181a345808c304a6fa2780bb4da&p=2)
 - [x]  [UE5.3-AirSim仿真环境搭建](./document/simulation-environment/UE5.3-AirSim-Environment.md)  关于 UE 5.3-AirSim 仿真环境搭建过程
 + 无人机跟随参考的项目：[Elastic-Tracker](https://github.com/ZJU-FAST-Lab/Elastic-Tracker) 相关的总结
 	+ [ ] [Elastic-Tracker 环境搭建问题总结](./document/Elastic-Tracker-Setup/Elastic-Tracker-Setup.md)  
