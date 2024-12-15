@@ -1,4 +1,6 @@
-![](image-0.png)
+![](./assets-of-ROS-UAV-project-structure/image-0.png)
+
+
 
 这是 ROS 无人机项目的大概框图，当我们在使用一个 ROS 无人机项目时，最好能大概从项目的各个节点中获取到这些信息，这样我们就可以更好地理解整个项目的结构
 
