@@ -34,7 +34,7 @@ FOR IARC
 - 大家重温 ROS 考核内容时关注的重点：[更新ing 欢迎大家一起补充完善](./document/ROS-summary/ROS-UAV-project-structure.md) 
 - [x]  [UE5.3-AirSim仿真环境搭建](./document/simulation-environment/UE5.3-AirSim-Environment.md)  关于 UE 5.3-AirSim 仿真环境搭建过程
 + 无人机跟随参考的项目：[Elastic-Tracker](https://github.com/ZJU-FAST-Lab/Elastic-Tracker) 相关的总结
-	+ [ ] [Elastic-Tracker 环境搭建问题总结](./document/Elastic-Tracker-Setup/Elastic-Tracker-Setup.md)  
+	+ [ ] [使用 GPU 模拟深度图像的配置注意事项](Elastic-Tracker-Setup.md)  
 + 组网相关的关键词：batman mesh 
 + 集群通信和规划参考的项目：[ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm) 
 	- 部署的 b 站视频：[【完结】从0制作自主空中机器人](https://www.bilibili.com/video/BV1WZ4y167me?spm_id_from=333.788.videopod.episodes&vd_source=9c85d181a345808c304a6fa2780bb4da)

@@ -15,6 +15,8 @@
 
 首先要知道自己显卡的架构，然后以 NVIDIA XXX GPU Architecture Compatibility 为关键词查找到类似的官方网页，如 [NVIDIA Ada GPU Architecture Compatibility Guide](https://docs.nvidia.com/cuda/ada-compatibility-guide/index.html#building-applications-using-cuda-toolkit-11-8)
 
+或者用这两个链接 [link1](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/) or [link2](https://github.com/tpruvot/ccminer/wiki/Compatibility) 进行查看
+
 然后在这个网页中查看自己安装好的 cuda-tooklit 版本支持哪些 nvcc 编译选项
 ![](/document/Elastic-Tracker-Setup/assets-of-Elastic-Tracker-Setup/image-1.png)
 
