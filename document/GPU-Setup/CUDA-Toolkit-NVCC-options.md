@@ -1,6 +1,4 @@
-# 复刻 Elastic Tracker 时的一些问题
-
-项目地址：[ZJU-FAST-Lab/Elastic-Tracker: Elastic Tracker: A Spatio-temporal Trajectory Planner Flexible Aerial Tracking](https://github.com/ZJU-FAST-Lab/Elastic-Tracker)
+# 复刻使用 NVCC 编译时版本选项会遇到的一些问题
 
 ## 1. 显卡架构、cuda-tooklit 和 nvcc 编译选项
 
@@ -18,18 +16,13 @@
 或者用这两个链接 [link1](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/) or [link2](https://github.com/tpruvot/ccminer/wiki/Compatibility) 进行查看
 
 然后在这个网页中查看自己安装好的 cuda-tooklit 版本支持哪些 nvcc 编译选项
-![](/document/Elastic-Tracker-Setup/assets-of-Elastic-Tracker-Setup/image-1.png)
+![](./assets-of-CUDA-Toolkit-NVCC-options/image-1.png)
 
 
 然后看自己能够支持的 `nvcc` 编译器的选项，然后在项目的 `src/uav_simulator/local_sensing/CMakeLists.txt` 中修改 `CUDA_NVCC_FLAGS `
 具体参考：
-![](/document/Elastic-Tracker-Setup/assets-of-Elastic-Tracker-Setup/image-2.png)
+![](./assets-of-CUDA-Toolkit-NVCC-options/image-2.png)
 
 之后再编译就可以看到正常的 GPU 渲染的等高颜色图了。
 
-## 2. catkin_make 时编译的警告
-
-yy 编译的时候会遇到警告，cmake 找不到 OpenCV、Boost 和 Eigen 的库，这个时候可以查看其中提示的源头 CMakelists.txt 文件，然后在其中添加 `find_package(OpenCV REQUIRED)`，`find_package(Boost REQUIRED)` 即可
-
-好像不添加也没什么问题，只是会有一些警告？
-
+## 2. to-be-continued
