@@ -37,7 +37,7 @@
 	- 固件和支持协议
 - **锂电池参数**
 	- **组合、容量**、放电率参数
-	 ![](assets-of-UAV-concepts/image-0.png)
+	 ![](./assets-of-UAV-concepts/image-0.png)
 	- 材料种类：一般是标准 LiPo 
 		- 单芯电压额定 3.7
 			- 如果低于 3.7 就是过放，会损坏电池
