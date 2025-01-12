@@ -1,6 +1,6 @@
 # PX4-ROS-LEARNING
 
-Author:@skoyhs(袁越)  
+Author:@skyswordx(袁越)  
 Date:2024.12.18
 
 ## 参考链接
