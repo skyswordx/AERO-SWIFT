@@ -105,6 +105,9 @@ roslaunch realsense2_camera rs_camera.launch
 此时可以用`rostopic`来查看相关话题  
 其他内容自行参考如下链接学习：  
 <https://github.com/IntelRealSense/realsense-ros/tree/2.3.2> 
+
+> tips: 上述的教程的SDK版本为v2.50.0，对应的固件版本为v5.13.0.50，需要使用3.0及3.0以上数据线和数据接口，不然会报错。如果要使最新版本，可自行探索。附上固件下载地址：<https://dev.intelrealsense.com/docs/firmware-releases-d400>
+
 ## 3. 参考链接
 
 + [Melodic + Realsense D435i 配置及错误问题解决](https://blog.csdn.net/Hacker_MAI/article/details/107976049)
