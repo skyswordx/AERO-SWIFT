@@ -52,7 +52,10 @@ FOR IARC
 
 ## 💖 编写注意事项
 
+1. 文件模版：[template](./templage.md)
 1. 每次提交的commit尽量具体
+2. 执行 `git push` 操作前先执行 `git pull` 操作将远程仓库同步到本地
+3. 不要使用`git push --force`命令进行提交
 2. 文件名用英文名，不要有空格之类的
 3. just do it！尽情编写，仓库自会有~~苦力~~来整理
 
