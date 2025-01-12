@@ -32,16 +32,15 @@ FOR IARC
 
 ## 🤫 资料区
 
-- 快速入门无人机基础知识的链接：[视频：无人机软硬件科普](https://www.bilibili.com/video/BV1Jq4y1T7QD?spm_id_from=333.788.videopod.episodes&vd_source=9c85d181a345808c304a6fa2780bb4da&p=2)
-	- 省流的[关键词列表](./document/UAV-concepts/UAV-concepts.md)（要是用到了可以直接用关键词搜索）
-- 大家重温 ROS 考核内容时关注的重点：[更新ing 欢迎大家一起补充完善](document/ROS-summary/PX4-ROS-LEARNING.md) 
-- [x]  [UE5.3-AirSim仿真环境搭建](./document/simulation-environment/UE5.3-AirSim-Environment.md)  关于 UE 5.3-AirSim 仿真环境搭建过程
-+ 无人机跟随参考的项目：[Elastic-Tracker](https://github.com/ZJU-FAST-Lab/Elastic-Tracker) 相关的总结
-	+ [ ] [使用 GPU 模拟深度图像的配置注意事项](./document/GPU-Setup/CUDA-Toolkit-NVCC-options.md)  
-+ 组网相关的关键词：batman mesh 
-+ 集群通信和规划参考的项目：[ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm) 
+- [视频：无人机软硬件科普](https://www.bilibili.com/video/BV1Jq4y1T7QD?spm_id_from=333.788.videopod.episodes&vd_source=9c85d181a345808c304a6fa2780bb4da&p=2)
+- [一些无人机硬件相关的关键词列表](./document/UAV-concepts/UAV-concepts.md)（要是用到了可以直接用关键词搜索）
+- [PX4相关学习资料](document/ROS-summary/PX4-ROS-LEARNING.md) 
+- [UE5.3-AirSim仿真环境搭建](./document/simulation-environment/UE5.3-AirSim-Environment.md)  关于 UE 5.3-AirSim 仿真环境搭建过程
+- 无人机跟随参考的项目[Elastic-Tracker](https://github.com/ZJU-FAST-Lab/Elastic-Tracker) 相关的总结
+	- [复刻使用 NVCC 编译时版本选项会遇到的一些问题](./document/GPU-Setup/CUDA-Toolkit-NVCC-options.md)
+- 集群通信和规划参考的项目：[ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm) 
 	- 部署的 b 站视频：[【完结】从0制作自主空中机器人](https://www.bilibili.com/video/BV1WZ4y167me?spm_id_from=333.788.videopod.episodes&vd_source=9c85d181a345808c304a6fa2780bb4da)
-- batman-mesh 相关的链接（**注意，下面链接都没有实际尝试过，只供展示相关关键词**）
+- batman-mesh 相关的链接
 	- [openwrt-batman-tutorial](https://github.com/benkay86/openwrt-batman-tutorial)
 	- [在 VMWare 中安装 OpenWrt | Shepherd's Blog](https://shepherd-xie.github.io/2024/09/26/deploy-openwrt-on-vmware/)
 

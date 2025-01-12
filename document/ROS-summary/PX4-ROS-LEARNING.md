@@ -1,5 +1,8 @@
 # PX4-ROS-LEARNING
 
+Author:@skoyhs(袁越)  
+Date:2024.12.18
+
 ## 参考链接
 
 这里是 PX4 官方文档的资料

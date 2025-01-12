@@ -1,5 +1,8 @@
 # 复刻使用 NVCC 编译时版本选项会遇到的一些问题
 
+Author：@skoyhs(袁越)
+Date：2024.12.18
+
 ## 1. 显卡架构、cuda-tooklit 和 nvcc 编译选项
 
 
