@@ -43,6 +43,7 @@ FOR IARC
 - batman-mesh 相关的链接
 	- [openwrt-batman-tutorial](https://github.com/benkay86/openwrt-batman-tutorial)
 	- [在 VMWare 中安装 OpenWrt | Shepherd's Blog](https://shepherd-xie.github.io/2024/09/26/deploy-openwrt-on-vmware/)
+- [D435i配置教程](./document/D435i-tutorial/D435i-tutorial.md)
 
 
 ## 🤓 一些灵光一现 (idea)
