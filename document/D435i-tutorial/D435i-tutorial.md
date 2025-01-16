@@ -1,7 +1,7 @@
 # D435i 配置教程
 
 Author：@liangbm3(梁倍铭)  
-Revise：@skyswordx(袁越)
+Revise：@skyswordx(袁越)  
 Date：2025.1.12
 
 # 1. RealSense 环境搭建
