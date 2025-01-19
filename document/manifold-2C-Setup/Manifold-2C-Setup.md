@@ -21,6 +21,8 @@ Date：2025.1.12
 
 ## 新上手要配置的就是要刷机成 ubuntu 20.04
 
+重装一个纯净的系统开始升级，或者直接刷入 20.04，**都需要准备一个大容量 u 盘刷入镜像做引导盘**
+
 ### 使用大疆官方镜像升级
 
 大疆官方 manifold-2: [ubuntu_16.04_iso镜像](https://www.dji.com/cn/manifold-2/downloads)
