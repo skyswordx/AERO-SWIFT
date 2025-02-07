@@ -40,6 +40,7 @@ FOR IARC
 	- [复刻使用 NVCC 编译时版本选项会遇到的一些问题](./document/GPU-Setup/CUDA-Toolkit-NVCC-options.md)
 - 集群通信和规划参考的项目：[ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm) 
 	- 部署的 b 站视频：[【完结】从0制作自主空中机器人](https://www.bilibili.com/video/BV1WZ4y167me?spm_id_from=333.788.videopod.episodes&vd_source=9c85d181a345808c304a6fa2780bb4da)
+ 	- 相关学习记录的文档：[EGO-Swarm 学习记录](document/ROS-summary/EGO-SWARM-LEARNING.md)
 - batman-mesh 相关的链接
 	- [openwrt-batman-tutorial](https://github.com/benkay86/openwrt-batman-tutorial)
 	- [在 VMWare 中安装 OpenWrt | Shepherd's Blog](https://shepherd-xie.github.io/2024/09/26/deploy-openwrt-on-vmware/)
@@ -53,7 +54,7 @@ FOR IARC
 
 ## 💖 编写注意事项
 
-1. 文件模版：[template](./templage.md)
+1. 文件模版：[template](./template.md)
 1. 每次提交的commit尽量具体
 2. 执行 `git push` 操作前先执行 `git pull` 操作将远程仓库同步到本地
 3. 不要使用`git push --force`命令进行提交
