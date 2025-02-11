@@ -14,15 +14,23 @@ Date:2024.12.18
 - [编写 ROS 包通过 MAVROS 控制 Offboard 模式的 PX4](https://docs.px4.io/main/zh/ros/mavros_offboard_cpp.html)
 	- [PX4-ROS-Gazebo 联合仿真](https://docs.px4.io/main/zh/simulation/ros_interface.html)
 
-trouble shooting
+这里是 XTDrone 官方文档资料和仓库
+- [XTDrone + PX4 1.13 版本 使用文档（Beta测试版） (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/install_scripts)
+- [robin-shaun/XTDrone: UAV Simulation Platform based on PX4, ROS and Gazebo (github.com)](https://github.com/robin-shaun/XTDrone)
+
+使用 XTDrone 平台进行 PX 4-ROS 仿真部分参考的的视频链接
+- [XTDrone 第4讲：键盘控制代码精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1jJ46eiEDJ/?spm_id_from=333.880.my_history.page.click&vd_source=9c85d181a345808c304a6fa2780bb4da)
+
+一个基于 XTDrone 移植 EGO-Swarm 到到 PX4-ROS 的 github 工程
+- [XXLiu-HNU/Fast-Drone-250-v2: autonomous drone for Gazebo simulation (github.com)](https://github.com/XXLiu-HNU/Fast-Drone-250-v2)
+
+在使用 XTDrone 时会遇到的一些 trouble shooting
 - [Command ‘python‘ not found, did you mean: command ‘python3‘ from deb -CSDN](https://blog.csdn.net/m0_66238629/article/details/128681069)
 - [ROS:ModuleNotFoundError: No module named ‘rospkg‘ -CSDN](https://blog.csdn.net/qq_42995327/article/details/119357775)
 
 可能有用的 blog
 - [AcmeUav (zenglong.xyz)](http://zenglong.xyz/page/3/#blog)
 
-使用 XTDrone 平台进行 PX4-ROS 仿真部分参考的的视频链接
-- [XTDrone 第4讲：键盘控制代码精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1jJ46eiEDJ/?spm_id_from=333.880.my_history.page.click&vd_source=9c85d181a345808c304a6fa2780bb4da)
 
 ## 从零开始的 PX4-ROS 之旅
 

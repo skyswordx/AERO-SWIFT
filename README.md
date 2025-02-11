@@ -54,6 +54,11 @@ FOR IARC
 
 突然想到的跟项目进度有关的任何小东西都欢迎丢过来！万一用上了呢😋
 
+**idea 1**
+- 先跟着 XTDrone 这个仿真平台的使用教程，熟悉一下 PX4-ROS 的使用方式
+- 然后在自己的 XTDrone 上面复现 [XXLiu-HNU/Fast-Drone-250-v2: autonomous drone for Gazebo simulation (github.com)](https://github.com/XXLiu-HNU/Fast-Drone-250-v2) 这个仓库的效果
+- 理解上述项目使用 EGO-Swarm 的方法，并部署在 PX4 固件的真机
+
 ## 💖 编写注意事项
 
 1. 文件模版：[template](./template.md)
