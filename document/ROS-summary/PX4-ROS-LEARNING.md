@@ -20,6 +20,10 @@ trouble shooting
 
 可能有用的 blog
 - [AcmeUav (zenglong.xyz)](http://zenglong.xyz/page/3/#blog)
+
+使用 XTDrone 平台进行 PX4-ROS 仿真部分参考的的视频链接
+- [XTDrone 第4讲：键盘控制代码精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1jJ46eiEDJ/?spm_id_from=333.880.my_history.page.click&vd_source=9c85d181a345808c304a6fa2780bb4da)
+
 ## 从零开始的 PX4-ROS 之旅
 
 因为 PX4 的 SDK 会随着版本变化而更新，并且 PX4 的飞控源码过于庞大复杂，实际上我们在开发的时候应该**不是直接使用 SDK**，而是参考 SDK 做好的 **MAVROS 通信接口来进行 ROS 软件包的开发**，所以重点关注的就是如何使用 MAVROS 来和 PX4 固件里面的基础模块互相通信了
@@ -94,7 +98,7 @@ P.S.
 
 首先是然启动 `launch` 文件，之后，Gazebo 仿真器就已经启动，机器人和仿真世界的模型已经配置好了，机器人的 PX4 控制器的 MAVROS 通信节点已经建立了，这就意味着其他 ROS 节点可以与其进行交互（PX4 控制器节点会把数据持续发布到相关 MAVROS 话题，并且 PX4 控制器节点也会主动订阅 MAVROS 控制指令话题）
 
-所以在 XTDrone 中就有相应的 `python` 脚本来实现了一个节点专门订阅 PX4 控制器的 MAVROS数据，并向 PX4 控制器发布 MAVROS 指令的中转站（在该脚本中，是写死了订阅了以 `/xtdrone` 前缀开头的所有话题，其他 ROS 节点只需要把指令发送到对应的以 `/xtdrone` 前缀开头的话题即可）
+所以在 XTDrone 中就有相应的 `python` 脚本来实现了一个节点专门订阅 PX4 控制器的 MAVROS数据，并作为中转站向 PX4 控制器发布 MAVROS 指令（在该脚本中，是写死了订阅了以 `/xtdrone` 前缀开头的所有话题，其他 ROS 节点只需要把指令发送到对应的以 `/xtdrone` 前缀开头的话题即可）
 
 因此，注意在配置仿真无人机的时候，上述脚本的启动有先后顺序，不能搞反了
 ```shell

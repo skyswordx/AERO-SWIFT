@@ -37,7 +37,7 @@ FOR IARC
 - [视频：无人机软硬件科普](https://www.bilibili.com/video/BV1Jq4y1T7QD?spm_id_from=333.788.videopod.episodes&vd_source=9c85d181a345808c304a6fa2780bb4da&p=2)
 - [一些无人机硬件相关的关键词列表](./document/UAV-concepts/UAV-concepts.md)（要是用到了可以直接用关键词搜索）
 - [PX4-ROS 相关学习资料](document/ROS-summary/PX4-ROS-LEARNING.md) 
-- [x] [UE5.3-AirSim仿真环境搭建](./document/simulation-environment/UE5.3-AirSim-Environment.md)  关于 UE 5.3-AirSim 仿真环境搭建过程
+- ~~[UE5.3-AirSim仿真环境搭建](./document/simulation-environment/UE5.3-AirSim-Environment.md)  关于 UE 5.3-AirSim 仿真环境搭建过程~~
 - 无人机跟随参考的项目[Elastic-Tracker](https://github.com/ZJU-FAST-Lab/Elastic-Tracker) 相关的总结
 	- [复刻使用 NVCC 编译时版本选项会遇到的一些问题](./document/GPU-Setup/CUDA-Toolkit-NVCC-options.md)
 - 集群通信和规划参考的项目：[ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm) 
