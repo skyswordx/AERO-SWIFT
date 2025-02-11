@@ -35,7 +35,7 @@ trouble shooting
 
 在进行 PX4-ROS 软件包开发时，除了直接上真机，又可以借助 Gazebo 进行可视化和仿真验证。然后实际上要运行 PX4-ROS 和 Gazebo 的仿真环境，就是运行其源码下的 `/launch` 文件夹内的 `launch` 启动文件 （比如使用 `roslaunch px4 xxx.launch`）
 
-在 PX4 源码 SDK 中已经做好了和 Gazebo 进行仿真的准备，在其源码下 `/Tools/sitl_gazebo` 这个路径就提供好了一系列 Gazebo 可以识别的模型文件和世界文件（sdf 文件） 
+在 PX4 源码 SDK 中已经做好了和 Gazebo 进行仿真的准备，在其源码下 `/Tools/sitl_gazebo` 这个路径就提供好了一系列 Gazebo 可以识别的模型文件和世界文件（`sdf` 文件） 
 
 然后实际上我们按照自己的需求设置 PX4-ROS 的仿真环境就是在编辑 PX4 的 `launch` 启动文件。当然不必每次都需要去从头手搓个 `launch` 文件来搭建仿真环境，生态成熟的社区是会有专门的脚本工具帮我们格式化生成相应的 `launch` 文件的，这就是所谓的仿真平台
 
@@ -56,13 +56,43 @@ P.S.
 
 其实最核心的就是要理解 `launch` 文件中 `xml` 格式的面向对象思想，整个文件就是用来配置仿真环境的，它把仿真环境抽象成了一个类的对象，可以通过引用其他类、设置不同命名空间来复用
 - 在 ` launch ` 文件中，`<launch>` 标签就是代表整个仿真的对象
-- 然后可以通过 `<arg name=xxx value=xxx>` 的方式指定当前 `launch` 对象的各个属性
-- 还可以用 `<include file= xxx.launch>` 利用其他 `launch` 配置文件类的信息
-- 并且利用 `<group ns=xxx_id>` 指定命名空间、分别引用其他配置文件来进行多机器人的配置，在 XTDrones 中已经实现了脚本自动生成各个命名空间来添加和管理多机器人
+- 然后可以通过 `<arg name = xxx value =xxx>` 的方式指定当前 `launch` 对象的各个属性
+- 还可以用 `<include file = xxx.launch>` 利用其他 `launch` 配置文件类的信息
+- 并且利用 `<group ns = xxx_id>` 指定命名空间，这个命名空间就代表了单个的机器人。需要在命名空间内指定 ID 编号、sdf 物理模型、MAVROS 端口和其他属性（这个标签名字本身是 `xxx_id` 是为了和多机仿真的命名方式保持一致）
+- 或者也可以分别指定多个命名空间来进行多机器人的配置，在 XTDrone 中已经实现了脚本自动生成一组命名空间来添加和管理多机器人
 
-具体的 `launch` 文件示例参见 `/PX4_Firmware/launch`，这种文件具体负责什么见源码注释即可。这里概括一下，就是先导入仿真环境的世界 `world` 文件、设置 Gazebo 仿真器本身的一些偏好配置和本次仿真的参数，然后再导入机器人，其中包括机器人物理模型导入和初始化、对应的 MAVROS 通信节点端口初始化等等
+具体的 `launch` 文件示例参见 `/PX4_Firmware/launch`，这种文件具体负责什么见源码注释即可。这里概括一下，就是先导入仿真环境的世界 `world` 文件、设置 Gazebo 仿真器本身的一些偏好配置和本次仿真的参数，然后再导入机器人，其中包括机器人物理模型导入和位姿初始化、对应的 MAVROS 通信节点端口初始化等等
 
-然后在启动完 `launch` 文件之后，Gazebo 仿真器已经启动，机器人和仿真世界的模型已经配置好了，机器人的 PX4 控制器的 MAVROS 通信节点已经建立了，这就意味着可以获取 PX4 控制器的 MAVROS 话题进行交互
+如果要更换不同的机器人的话，要利用 Vscode 中的 `ctrl+F` 来批量替换 `launch` 文件中的注释、 `<group ns=xxx>` 标签名字本身和命名空间内部的 `sdf` 物理模型信息
+> 注意，这个 `sdf` 目录是放在 `PX4_Firmware/Tools/sitl_gazebo/models/` 下面的，由于每一个机器人的物理模型所配备的外设不一定都是对应的，直接一键替换有外设的机器人需要注意是否存在对应的 `sdf` 目录以及对应的 `sdf` 文件、对应的外设 `stl` 文件
+
+
+参考链接
+- 单个无人机 ＋ 固定仿真地形：[配置与控制不同的无人机 (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/vehicle_config)
+- 多无人机自动化生成 `launch` 文件脚本：[多机型混合仿真支持 (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/multi_vehicle)
+- [【ROS-Gazebo】SDF机器人描述格式解析 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/67470858)
+
+### PX4-SDF 目录与仿真模型
+
+正如上文提到的，在 `launch` 启动文件命名空间标签代表的就是一个机器人单体，在其中的 `sdf` 属性指定的就是其 `sdf` 文件所在的 `sdf` 目录，都位于源码 `/Tools/sitl_gazebo/models/ ` 下面的
+
+一个合格的 `sdf` 目录要包含下面的要素
+```shell
+. # 机器人 xxx 的 SDF 目录
+├── meshes # 机器人各个部位的 STL 三维模型
+│      ├─ ...
+│      ├─ ...
+│      └─ ...
+├─ model.config # 包含这个机器人模型的 SDF 文件版本号、作者以及描述信息
+└── xxx.sdf # 类似于 urdf 包含各个 STL 文件的配合方式和几何、物理、碰撞信息
+# 注意 model.config 中的 SDF 文件名要和实际的相符合
+```
+
+### PX4-ROS-Gazebo 仿真通信框架
+
+这里主要介绍 PX4-ROS-Gazebo 仿真时，为了和其他 ROS 之间进行通信实现自动驾驶所需要的流程和框架
+
+首先是然启动 `launch` 文件，之后，Gazebo 仿真器就已经启动，机器人和仿真世界的模型已经配置好了，机器人的 PX4 控制器的 MAVROS 通信节点已经建立了，这就意味着其他 ROS 节点可以与其进行交互（PX4 控制器节点会把数据持续发布到相关 MAVROS 话题，并且 PX4 控制器节点也会主动订阅 MAVROS 控制指令话题）
 
 所以在 XTDrone 中就有相应的 `python` 脚本来实现了一个节点专门订阅 PX4 控制器的 MAVROS数据，并向 PX4 控制器发布 MAVROS 指令的中转站（在该脚本中，是写死了订阅了以 `/xtdrone` 前缀开头的所有话题，其他 ROS 节点只需要把指令发送到对应的以 `/xtdrone` 前缀开头的话题即可）
 
@@ -85,10 +115,6 @@ python multirotor_keyboard_control.py solo 1 vel
 根据上述命令配置一个简单的 PX4-ROS 仿真之后的节点和话题关系图如下所示，这里暂时省略了 `/xtdrone` 前缀开头的所有话题，只有 PX4 控制器的 MAVROS 节点和中转 ROS 节点
 ![](assets-of-PX4-ROS-LEARNING/image-2.png)
 
-参考链接
-- 单个无人机 ＋ 固定仿真地形：[配置与控制不同的无人机 (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/vehicle_config)
-- 多无人机自动化生成 `launch` 文件脚本：[多机型混合仿真支持 (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/multi_vehicle)
-- [【ROS-Gazebo】SDF机器人描述格式解析 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/67470858)
 
 
 
