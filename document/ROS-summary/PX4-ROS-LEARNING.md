@@ -6,49 +6,88 @@ Date:2024.12.18
 ## 参考链接
 
 这里是 PX4 官方文档的资料
+- [PX4 文档主页 (px-4.com)](https://px-4.com/main/index.html)
+- [PX4 文档教程 (px-4.com)](https://px-4.com/main/en/getting_started/px4_basic_concepts.html)
+- [PX4 自动驾驶用户指南 (v1.13)](https://docs.px4.io/v1.13/zh/)
 - [使用 PX4-SDK 来控制 PX4](https://docs.px4.io/main/zh/modules/hello_sky.html)
 	- [针对不同平台编译 PX4 代码](https://docs.px4.io/main/zh/dev_setup/building_px4.html#gazebo-classic)
 - [编写 ROS 包通过 MAVROS 控制 Offboard 模式的 PX4](https://docs.px4.io/main/zh/ros/mavros_offboard_cpp.html)
 	- [PX4-ROS-Gazebo 联合仿真](https://docs.px4.io/main/zh/simulation/ros_interface.html)
 
+trouble shooting
+- [Command ‘python‘ not found, did you mean: command ‘python3‘ from deb -CSDN](https://blog.csdn.net/m0_66238629/article/details/128681069)
+- [ROS:ModuleNotFoundError: No module named ‘rospkg‘ -CSDN](https://blog.csdn.net/qq_42995327/article/details/119357775)
+
+可能有用的 blog
+- [AcmeUav (zenglong.xyz)](http://zenglong.xyz/page/3/#blog)
 ## 从零开始的 PX4-ROS 之旅
 
-因为 PX4 的 SDK 会随着版本变化而更新，实际上我们在开发的时候应该**不是直接使用 SDK**，而是参考 SDK 做好的 **MAVROS 通信接口来进行 ROS 软件包的开发**，所以重点关注的就是如何使用 MAVROS 来控制 PX4 了
+因为 PX4 的 SDK 会随着版本变化而更新，并且 PX4 的飞控源码过于庞大复杂，实际上我们在开发的时候应该**不是直接使用 SDK**，而是参考 SDK 做好的 **MAVROS 通信接口来进行 ROS 软件包的开发**，所以重点关注的就是如何使用 MAVROS 来和 PX4 固件里面的基础模块互相通信了
 
 下面是是 ROS 无人机项目的大概框图，当我们在使用一个 ROS 无人机项目时，最好能大概知道项目的各个节点中有话题和服务在传递，各个节点是怎么协作的，这样我们就可以更好地理解整个项目的结构，然后在后续进行魔改
 ![](assets-of-PX4-ROS-LEARNING/image-1.png)
 
 
-这需要我们重点关注运行项目时，项目提供的 `launch` 文件，这些文件里面包含了各个节点甚至是各个模块的启动顺序，可以是我们了解一个项目的入口
+这就需要我们重点关注运行项目时，项目提供的 `launch` 文件，这些文件里面包含了各个节点甚至是各个模块的启动顺序，可以是我们了解一个项目的入口
 
 然后在运行项目时，我们可以通过善用 ROS 终端工具来查看项目的节点之间的关系、发布的话题消息、服务有哪些（对于终端工具有个印象即可，不必记 api，但是要想起来要理清项目结构需要获取那些信息，然后去查对应的命令）
+## PX4-ROS 和 Gazebo 仿真的关系
+
+在进行 PX4-ROS 软件包开发时，除了直接上真机，又可以借助 Gazebo 进行可视化和仿真验证。然后实际上要运行 PX4-ROS 和 Gazebo 的仿真环境，就是运行其源码下的 `/launch` 文件夹内的 `launch` 启动文件 （比如使用 `roslaunch px4 xxx.launch`）
+
+在 PX4 源码 SDK 中已经做好了和 Gazebo 进行仿真的准备，在其源码下 `/Tools/sitl_gazebo` 这个路径就提供好了一系列 Gazebo 可以识别的模型文件和世界文件（sdf 文件） 
+
+然后实际上我们按照自己的需求设置 PX4-ROS 的仿真环境就是在编辑 PX4 的 `launch` 启动文件。当然不必每次都需要去从头手搓个 `launch` 文件来搭建仿真环境，生态成熟的社区是会有专门的脚本工具帮我们格式化生成相应的 `launch` 文件的，这就是所谓的仿真平台
+
+XTDrones 就是一个开源的 PX4-ROS 仿真平台，它提供了**一系列预设**的 `python` 代码模块，可以格式化生成各种符合需求的 `launch` 文件（如室内 or 室外环境、单机 or 多机编队）也提供了一些用 MAVROS 和 PX4 固件的控制器通信的 ROS 节点和接口，在使用时可以直接 copy 添加进我们自己的 ROS 工作空间的软件包中
+
+其使用文档如下
+> [XTDrones + PX4 1.13 版本 使用文档（Beta测试版） (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/install_scripts)
 
 
-## 编写 PX4-ROS 软件包的注意事项
+P.S.
+> `utils` 是用来指代工具模块，存放一些常用的函数和类。这些函数和类通常是一些辅助性质的，可以用来简化代码、提高代码的可读性和可维护性
 
-## 进行 ROS-PX4 仿真的启动顺序
+### PX4-ROS-Gazebo 仿真启动文件
 
+这里主要是熟悉 PX4 的 `launch` 启动文件的配置，目前 PX4 主推使用 `sdf` 来建模环境和机器人，和寻常的 `urdf` 和 `xacro` 并不一样。但这不是重点，两者并没有什么本质的区别，都是使用 `xml` 来进行建模
+
+
+主要要注意 PX4 官方提供的 `launch` 配置文件的格式，按照官方示例中给的 `<arg>` 标签参考的意义进行修改就可以达到其他自定义的效果了
+
+其实最核心的就是要理解 `launch` 文件中 `xml` 格式的面向对象思想，整个文件就是用来配置仿真环境的，它把仿真环境抽象成了一个类的对象，并且通过引用其他类、设置不同命名空间来引用
+- 在 ` launch ` 文件中，`<launch>` 标签就是代表整个仿真的对象
+- 然后可以通过 `<arg name=xxx value=xxx>` 的方式指定当前 `launch` 对象的各个属性
+- 还可以用 `<include file= xxx.launch>` 利用其他 `launch` 配置文件类的信息
+- 并且利用 `<group ns=xxx_id>` 指定命名空间、分别引用其他配置文件来进行多机器人的配置，在 XTDrones 中已经实现了脚本自动生成各个命名空间来添加和管理多机器人
+
+具体的 `launch` 文件示例参见 `/PX4_Firmware/launch` 
+
+注意在配置仿真无人机的时候，脚本的启动有先后顺序
 ```shell
-cd <PX4-Autopilot_clone>
-DONT_RUN=1 make px4_sitl_default gazebo-classic
+# 1. 启动 px4 的 launch 文件
+roslaunch px4 xxx.launch 
 
-source Tools/simulation/gazebo-classic/setup_gazebo.bash $(pwd) $(pwd)/build/px4_sitl_default
+# 2. 启动无人机通信端口初始化脚本
+cd ~/XTDrone/communication
+python multirotor_communication.py solo 0 
+# solo 代表子机型，需要和 launch 文件中的机型相匹配，0 代表飞机的编号
 
-export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)
-export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)/Tools/simulation/gazebo-classic/sitl_gazebo-classic
-
-roslaunch mavros px4.launch fcu_url:="udp://:14540@192.168.1.36:14557"
-roslaunch px4 posix_sitl.launch
+# 3. 启动用按键控制无人机的通信脚本
+cd ~/XTDrone/control/keyboard
+python multirotor_keyboard_control.py solo 1 vel
+# solo 代表子机型，1 代表飞机的个数，vel 代表速度控制
 ```
 
-## P.S
+参考链接
+- 单个无人机 ＋ 固定仿真地形：[配置与控制不同的无人机 (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/vehicle_config)
+- 多无人机自动化生成 `launch` 文件脚本：[多机型混合仿真支持 (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/multi_vehicle)
+- [【ROS-Gazebo】SDF机器人描述格式解析 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/67470858)
 
-大家可以都去申请 github 学生包，可以用 VScode 在工作区或者文件内内联使用 o1-preview 但是这个需要进行身份信息的补完
-- 2 FA
-- authorization 令牌
-- 学信网学生证明（deepl 翻译成英文）
-- 学校邮箱
-- 邮政编码
+
+
+
+
 
 
 

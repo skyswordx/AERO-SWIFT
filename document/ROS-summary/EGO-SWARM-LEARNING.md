@@ -1,5 +1,5 @@
 
-# EGO-Swarm 项目代码的学习
+# EGO-Swarm 项目的学习
 
 Author:@skyswordx(袁越), ...  
 Date:2025.2.7
@@ -32,8 +32,4 @@ Date:2025.2.7
 └── uav_simulator # 仿真环境的节点实现
 ```
 
-## `ego_planner_node` 的实现 
-TODO
-## `traj_server` 的实现
-TODO
 
