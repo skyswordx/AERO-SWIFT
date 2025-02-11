@@ -11,9 +11,10 @@ FOR IARC
 ---
 **目录：**
 1. ✌🏻 进度安排
-2. 🤫 资料区
+2. 🎯 目前重点文档
 3. 🤓 一些灵光一现 (idea)
-4. 💖 编写注意事项
+4. 🤫 资料区
+5. 💖 编写注意事项
 
 ---
 
@@ -32,6 +33,16 @@ FOR IARC
 
 - [PX4-ROS 相关学习资料](document/ROS-summary/PX4-ROS-LEARNING.md) 
 - [EGO-Swarm 学习记录文档](document/ROS-summary/EGO-SWARM-LEARNING.md)
+
+## 🤓 一些灵光一现 (idea)
+
+突然想到的跟项目进度有关的任何小东西都欢迎丢过来！万一用上了呢😋
+
+**idea 1**
+- 先跟着 XTDrone 这个仿真平台的使用教程，熟悉一下 PX 4-ROS 的使用方式
+- 然后在自己的 XTDrone 上面复现 [XXLiu-HNU/Fast-Drone-250-v2: autonomous drone for Gazebo simulation (github.com)](https://github.com/XXLiu-HNU/Fast-Drone-250-v2) 这个仓库的效果
+- 理解上述项目使用 EGO-Swarm 的方法，并部署在 PX 4 固件的真机
+
 ## 🤫 资料区
 
 - [视频：无人机软硬件科普](https://www.bilibili.com/video/BV1Jq4y1T7QD?spm_id_from=333.788.videopod.episodes&vd_source=9c85d181a345808c304a6fa2780bb4da&p=2)
@@ -50,14 +61,6 @@ FOR IARC
 - [妙算 manifold-2C 配置经验]()
 
 
-## 🤓 一些灵光一现 (idea)
-
-突然想到的跟项目进度有关的任何小东西都欢迎丢过来！万一用上了呢😋
-
-**idea 1**
-- 先跟着 XTDrone 这个仿真平台的使用教程，熟悉一下 PX4-ROS 的使用方式
-- 然后在自己的 XTDrone 上面复现 [XXLiu-HNU/Fast-Drone-250-v2: autonomous drone for Gazebo simulation (github.com)](https://github.com/XXLiu-HNU/Fast-Drone-250-v2) 这个仓库的效果
-- 理解上述项目使用 EGO-Swarm 的方法，并部署在 PX4 固件的真机
 
 ## 💖 编写注意事项
 
