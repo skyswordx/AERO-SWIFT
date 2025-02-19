@@ -185,20 +185,45 @@ python multirotor_keyboard_control.py solo 1 vel
 参考链接
 - [第3讲：配置与控制不同的无人机_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1xA46e7EKV?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
 
-## PX4-ROS-Gazebo 仿真通信节点的接口
+### 相关节点的接口
 
+可以设置通信节点订阅其他 ROS 节点的话题或者服务，把命令组织成 `Twist` 格式的消息发布给上述的 `/mavros/setpoint_raw/local` 话题
 
 参考链接
 - [第4讲：键盘控制代码精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1jJ46eiEDJ?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
 - [第5讲：Mavros通信代码精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1EE46eTEg9?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
-## 配置 EKF 文件
+- [第6讲：更加精准地控制无人机_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1ip46eeE8v?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
+
+### 多机集群的仿真模型生成和对应通信节点启动
+
+多机集群的仿真模型生成
+- 多机模型生成 `py` 脚本自动化地用文件写入包以命名空间的形式编辑 `launch` 仿真启动文件生成多个无人机
+
+对应通信节点启动
+- 在多机通信启动的 `py` 脚本中写死了到底生成多少种和多少个无人机，然后根据这个信息批量调用单机的通信启动脚本
+
+参考链接
+- [多机型混合仿真支持](https://www.yuque.com/xtdrone/manual_cn/multi_vehicle)
+- [第10讲：多机型混合仿真|集群生成_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1rG46e3EzP?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
+## PX4 配置 EKF 文件选择定位数据源
+
+和 PX4 控制器通信的节点会订阅 `/mavros/local_position/pose` 来获取定位数据，这个定位数据就是无人机通过自己传感器获取到的处于环境中的位置和姿态。这个数据是十分重要的，是后续规划、导航、建图等其他算法的基础
+> 一般情况下，自主飞行的无人机需要有位姿数据，在 `/mavros/local_position/pose` 下面应该有正确的数据，如果没有定位数据，甚至无法切换到 offboard 模式正常自主飞行
+
+这个定位数据的来源目前有两种，第一种是使用融合 **GPS** 的水平位置与气压计高度的定位数据；第二种是使用深度相机或立体相机进行**视觉定位**算法获取到的定位数据（视觉 SLAM、激光 SLAM和仿真中直接获取Gazebo 真值）
+> 在室内没办法使用 GPS 定位，就要使用深度相机或立体相机
+
+不同的定位数据来源需要在 PX4 设置不同的 EKF 配置。它默认使用的 EKF 配置是 GPS 的。如果要用视觉定位，就需要修改 EKF 配置文件。
+> 注意，并不是修改完无人机就可以视觉定位了，需要相关程序提供 `mavros/vision_pose/pose`的数据，相关程序包括视觉SLAM、激光SLAM和获取Gazebo真值等。如果没有额外的视觉数据，想要飞行必须改回基于GPS和气压计的定位
+
+
+在 Gazebo 仿真中，只要把对应的传感器 `include` 进去机器人的 SDF 文件，机器人 PX4 控制器的 MAVROS 节点就可以发布对应数据源的 `/mavros/local_position/pose` 话题
+
+具体修改方法参见 [EKF 基础配置（对应PX4 1.13版）](https://www.yuque.com/xtdrone/manual_cn/ekf_settings)
 
 参考链接
 - [第7讲：无人机的EKF配置_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1SE421F7xS?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
-
-
-## 多机集群的仿真模型生成和通信启动
-
+- [EKF 基础配置（对应PX4 1.13版）](https://www.yuque.com/xtdrone/manual_cn/ekf_settings)
 
 ## EGO-SWARM 的 PX4-Gazebo 仿真
 
