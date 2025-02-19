@@ -53,14 +53,14 @@ Date:2024.12.18
 
 XTDrone 就是一个开源的 PX4-ROS 仿真平台，它提供了**一系列预设**的 `python` 代码模块，可以格式化生成各种符合需求的 `launch` 文件（如室内 or 室外环境、单机 or 多机编队）也提供了一些用 MAVROS 协议和 PX4 固件的控制器通信的接口，在使用时可以直接 copy 添加进我们自己的 ROS 工作空间的软件包中
 
-其使用文档如下
+**其使用文档如下，推荐是先读完使用文档的前八个部分再看本篇文章以后的部分**
 > [XTDrone + PX4 1.13 版本 使用文档（Beta测试版） (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/install_scripts)
 
 
 P.S.
 > `utils` 是用来指代工具模块，存放一些常用的函数和类。这些函数和类通常是一些辅助性质的，可以用来简化代码、提高代码的可读性和可维护性
 
-### PX4-ROS-Gazebo 仿真启动文件
+## PX4-ROS-Gazebo 仿真启动文件
 
 这里主要是熟悉 PX4 的 `launch` 启动文件的配置，目前 PX4 主推使用 `sdf` 来建模环境和机器人，和寻常的 `urdf` 和 `xacro` 并不一样。但这不是重点，两者并没有什么本质的区别，都是使用 `xml` 来进行建模
 
@@ -76,7 +76,7 @@ P.S.
 具体的 `launch` 文件示例参见 `/PX4_Firmware/launch`，这种文件具体负责什么见源码注释即可。这里概括一下，就是先导入仿真环境的世界 `world` 文件、设置 Gazebo 仿真器本身的一些偏好配置和本次仿真的参数，然后再导入机器人，其中包括机器人物理模型导入和位姿初始化、对应的 MAVROS 通信节点端口初始化等等
 
 如果要更换不同的机器人的话，要利用 Vscode 中的 `ctrl+F` 来批量替换 `launch` 文件中的注释、 `<group ns=xxx>` 标签名字本身和命名空间内部的 `sdf` 物理模型信息
-> 注意，这个 `sdf` 目录是放在 `PX4_Firmware/Tools/sitl_gazebo/models/` 下面的，由于每一个机器人的物理模型所配备的外设不一定都是对应的，直接一键替换有外设的机器人需要注意是否存在对应的 `sdf` 目录以及对应的 `sdf` 文件、对应的外设 `stl` 文件
+> 注意，这个 `sdf` 目录是放在 `PX4_Firmware/Tools/sitl_gazebo/models/` 下面的，由于每一个机器人的物理模型所配备的外设不一定都是对应的，直接一键替换有外设的机器人需要注意是否存在对应的 `sdf` 目录以及对应的 `sdf` 文件、在文件内部对应的外设 3D 文件路径是否正确等等
 
 
 参考链接
@@ -84,9 +84,9 @@ P.S.
 - 多无人机自动化生成 `launch` 文件脚本：[多机型混合仿真支持 (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/multi_vehicle)
 - [【ROS-Gazebo】SDF机器人描述格式解析 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/67470858)
 
-### PX4-SDF 目录与仿真模型
+## PX4 仿真 SDF 模型和传感器配置
 
-正如上文提到的，在 `launch` 启动文件命名空间标签代表的就是一个机器人单体，在其中的 `sdf` 属性指定的就是其 `sdf` 文件所在的 `sdf` 目录，都位于源码 `/Tools/sitl_gazebo/models/ ` 下面的
+正如上文提到的，在 `launch` 启动文件命名空间标签代表的就是一个机器人单体，其中的 `sdf` 属性指定的就是其 `sdf` 文件所在的 `sdf` 目录，都是位于源码 `/Tools/sitl_gazebo/models/ ` 下面的
 
 一个合格的 `sdf` 目录要包含下面的要素
 ```shell
@@ -97,10 +97,65 @@ P.S.
 │      └─ ...
 ├─ model.config # 包含这个机器人模型的 SDF 文件版本号、作者以及描述信息
 └── xxx.sdf # 类似于 urdf 包含各个 STL 文件的配合方式和几何、物理、碰撞信息
-# 注意 model.config 中的 SDF 文件名要和实际的相符合
+# 注意 model.config 中的 SDF 文件名和版本号要和实际文件里面的相符合
 ```
 
-### PX4-ROS-Gazebo 仿真通信框架
+然后再来看看这个模型 `sdf` 文件的大致结构
+```xml
+<sdf version='1.6'> 
+	<model name='iris'> 
+	%% 模型中的各个部件实体就用 link 标签指定 %%
+	    <link name='base_link'>
+	    </link> 
+	    %% 在一个模型里面只有一个叫做 base_link 的 link 标签作为主体
+	    %% 在 link 标签里面有 colliison\visual\... 等子标签为这个实体指定属性
+	    
+	    <link name='/other_item_link'>
+	    </link> %% 声明其他的部件也用 link 标签 %%	    
+	    <joint name='/other_item_joint' type='...'>
+	        %% 紧接着就用 joint 标签来指定各个 link 标签的关系 %%
+	        <child>/other_item_link</child> 
+	        <parent>base_link</parent>
+	        ...
+	    </joint>
+
+	    <plugin name='xxx' file='libgazebo_xxx.so'>
+	    </plugin> %% 用静态库为自己的部件在 Gazebo 仿真中添加对应的功能
+	</model>
+</sdf>
+```
+
+如果要为现成的 `sdf` 文件从外部导入其他部件作为传感器的话，就要使用 `<include>` 标签，在导入之后还是一样要像其他 `<link>` 标签部件一样用 `<joint>` 标签指定和 `base_link` 的关系
+```xml
+<include> %% 通过 url 导入 stereo_camera.sdf 文件%%
+    <uri>model://stereo_camera</uri>
+    <pose>...</pose>
+</include>
+
+%% 一样使用 joint 标签指定和 base_link 的关系
+<joint name="stereo_joint" type="fixed">
+    <child>stereo_camera::link</child>
+    <parent>base_link</parent>
+    ...
+</joint>
+```
+
+在导入传感器部件时，这个来自于传感器的 `sdf`，比如这个就是 `stereo_camera.sdf`。这种模型的路径有两个，一个在 `~/.gazebo/models/` 下，另一个在 PX4 固件的路径下 `~/PX4_Firmware/Tools/sitl_gazebo/models/` 下，优先从前者找，因此我们在配置 PX4 的时候，那个一键安装脚本已经把 `~/.gazebo/models/` 下的双目相机模型删除
+
+无人机的传感器部件有两类，一类是必须有的，一类是可以添加的。由于 XTDrone 的底层控制和状态估计来自于 PX4，因此必须有的传感器也是来自于 PX4 的状态估计需求，即加速度计、陀螺仪、磁罗盘、气压计；而 GPS 由于需要靠 mavlink 通信，因此也是默认配置的
+
+可添加的包括了单目/双目相机、深度相机与2D/3D激光雷达
+
+值得注意的是，按照这种方法添加的传感器，其插件发布的话题，都是带有无人机类型的前缀的，如 `/iris_0/stereo_camera/left/image_raw`
+
+`
+> 可以在 Vscode 中添加一些插件来预览 3D 模型，`sdf` 文件则使用 `xml` 解释器去渲染
+
+参考链接
+- [传感器配置 (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/sensor_config)
+- [第13讲：改变无人机上搭载的相机或雷达_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1JL46euE2k?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
+
+## PX4-ROS-Gazebo 仿真通信框架
 
 这里主要介绍 PX4-ROS-Gazebo 仿真时，为了和其他 ROS 之间进行通信实现自动驾驶所需要的流程和框架
 
@@ -127,13 +182,32 @@ python multirotor_keyboard_control.py solo 1 vel
 根据上述命令配置一个简单的 PX4-ROS 仿真之后的节点和话题关系图如下所示，这里暂时省略了 `/xtdrone` 前缀开头的所有话题，只有 PX4 控制器的 MAVROS 节点和中转 ROS 节点
 ![](assets-of-PX4-ROS-LEARNING/image-2.png)
 
+参考链接
+- [第3讲：配置与控制不同的无人机_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1xA46e7EKV?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
+
+## PX4-ROS-Gazebo 仿真通信节点的接口
 
 
+参考链接
+- [第4讲：键盘控制代码精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1jJ46eiEDJ?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
+- [第5讲：Mavros通信代码精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1EE46eTEg9?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
+## 配置 EKF 文件
+
+参考链接
+- [第7讲：无人机的EKF配置_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1SE421F7xS?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
 
 
+## 多机集群的仿真模型生成和通信启动
 
 
+## EGO-SWARM 的 PX4-Gazebo 仿真
+
+参考链接
+- Fast-drone/...
+- [第24讲：解决Ego在仿真中不能运行的问题_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV13jtLexEwf?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
+- [第25讲：Egoplanner集群仿真_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1qAx5etEaV?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
+- [我觉得EgoPlanner没有宣传的那么好_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1HH4y1z78Q/?spm_id_from=333.337.search-card.all.click&vd_source=9c85d181a345808c304a6fa2780bb4da)
 
 
-
+## VINS 深度相机内参标定
 
