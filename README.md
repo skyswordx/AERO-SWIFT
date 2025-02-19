@@ -39,9 +39,11 @@ FOR IARC
 突然想到的跟项目进度有关的任何小东西都欢迎丢过来！万一用上了呢😋
 
 **idea 1**
-- 先跟着 XTDrone 这个仿真平台的使用教程，熟悉一下 PX 4-ROS 的使用方式
-- 然后在自己的 XTDrone 上面复现 [XXLiu-HNU/Fast-Drone-250-v2: autonomous drone for Gazebo simulation (github.com)](https://github.com/XXLiu-HNU/Fast-Drone-250-v2) 这个仓库的效果
-- 理解上述项目使用 EGO-Swarm 的方法，并部署在 PX 4 固件的真机
+- 先跟着 XTDrone 这个仿真平台的使用教程，熟悉一下 PX4-ROS 的使用方式
+- 然后在自己的 XTDrone 上面复现 [XXLiu-HNU/Fast-Drone-250-v2:多机 Gazebo 仿真](https://github.com/XXLiu-HNU/Fast-Drone-250-v2)
+- 理解上述项目使用 EGO-Swarm 的方法，并部署在 PX4 固件的真机
+- **目前在文档 [PX4-ROS 相关学习资料](document/ROS-summary/PX4-ROS-LEARNING.md) 中已经准备好了相关流程的介绍和要做的事情**
+- **剩余重点目标是基于 fastdrone 跑 EGO-Swarm 的 gazebo 仿真**
 
 ## 🤫 资料区
 
@@ -59,8 +61,6 @@ FOR IARC
 	- [在 VMWare 中安装 OpenWrt | Shepherd's Blog](https://shepherd-xie.github.io/2024/09/26/deploy-openwrt-on-vmware/)
 - [D435i配置教程](./document/D435i-tutorial/D435i-tutorial.md)
 - [妙算 manifold-2C 配置经验]()
-
-
 
 ## 💖 编写注意事项
 

@@ -2,36 +2,6 @@
 
 Author:@skyswordx(袁越)  
 Date:2024.12.18
-
-## 参考链接
-
-这里是 PX4 官方文档的资料
-- [PX4 文档主页 (px-4.com)](https://px-4.com/main/index.html)
-- [PX4 文档教程 (px-4.com)](https://px-4.com/main/en/getting_started/px4_basic_concepts.html)
-- [PX4 自动驾驶用户指南 (v1.13)](https://docs.px4.io/v1.13/zh/)
-- [使用 PX4-SDK 来控制 PX4](https://docs.px4.io/main/zh/modules/hello_sky.html)
-	- [针对不同平台编译 PX4 代码](https://docs.px4.io/main/zh/dev_setup/building_px4.html#gazebo-classic)
-- [编写 ROS 包通过 MAVROS 控制 Offboard 模式的 PX4](https://docs.px4.io/main/zh/ros/mavros_offboard_cpp.html)
-	- [PX4-ROS-Gazebo 联合仿真](https://docs.px4.io/main/zh/simulation/ros_interface.html)
-
-这里是 XTDrone 官方文档资料和仓库
-- [XTDrone + PX4 1.13 版本 使用文档（Beta测试版） (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/install_scripts)
-- [robin-shaun/XTDrone: UAV Simulation Platform based on PX4, ROS and Gazebo (github.com)](https://github.com/robin-shaun/XTDrone)
-
-使用 XTDrone 平台进行 PX 4-ROS 仿真部分参考的的视频链接
-- [XTDrone 第4讲：键盘控制代码精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1jJ46eiEDJ/?spm_id_from=333.880.my_history.page.click&vd_source=9c85d181a345808c304a6fa2780bb4da)
-
-一个基于 XTDrone 移植 EGO-Swarm 到到 PX4-ROS 的 github 工程
-- [XXLiu-HNU/Fast-Drone-250-v2: autonomous drone for Gazebo simulation (github.com)](https://github.com/XXLiu-HNU/Fast-Drone-250-v2)
-
-在使用 XTDrone 时会遇到的一些 trouble shooting
-- [Command ‘python‘ not found, did you mean: command ‘python3‘ from deb -CSDN](https://blog.csdn.net/m0_66238629/article/details/128681069)
-- [ROS:ModuleNotFoundError: No module named ‘rospkg‘ -CSDN](https://blog.csdn.net/qq_42995327/article/details/119357775)
-
-可能有用的 blog
-- [AcmeUav (zenglong.xyz)](http://zenglong.xyz/page/3/#blog)
-
-
 ## 从零开始的 PX4-ROS 之旅
 
 因为 PX4 的 SDK 会随着版本变化而更新，并且 PX4 的飞控源码过于庞大复杂，实际上我们在开发的时候应该**不是直接使用 SDK**，而是参考 SDK 做好的 **MAVROS 通信接口来进行 ROS 软件包的开发**，所以重点关注的就是如何使用 MAVROS 来和 PX4 固件里面的基础模块互相通信了
@@ -53,9 +23,8 @@ Date:2024.12.18
 
 XTDrone 就是一个开源的 PX4-ROS 仿真平台，它提供了**一系列预设**的 `python` 代码模块，可以格式化生成各种符合需求的 `launch` 文件（如室内 or 室外环境、单机 or 多机编队）也提供了一些用 MAVROS 协议和 PX4 固件的控制器通信的接口，在使用时可以直接 copy 添加进我们自己的 ROS 工作空间的软件包中
 
-**其使用文档如下，推荐是先读完使用文档的前八个部分再看本篇文章以后的部分**
+**其使用文档如下，推荐是先读完操作一下使用文档的前八个部分再看本篇文章以后的部分**
 > [XTDrone + PX4 1.13 版本 使用文档（Beta测试版） (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/install_scripts)
-
 
 P.S.
 > `utils` 是用来指代工具模块，存放一些常用的函数和类。这些函数和类通常是一些辅助性质的，可以用来简化代码、提高代码的可读性和可维护性
@@ -225,7 +194,9 @@ python multirotor_keyboard_control.py solo 1 vel
 - [第7讲：无人机的EKF配置_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1SE421F7xS?spm_id_from=333.788.videopod.sections&vd_source=9c85d181a345808c304a6fa2780bb4da)
 - [EKF 基础配置（对应PX4 1.13版）](https://www.yuque.com/xtdrone/manual_cn/ekf_settings)
 
-## EGO-SWARM 的 PX4-Gazebo 仿真
+## EGO-SWARM 的 PX4-Gazebo 仿真（TODO）
+
+转到 [EGO-SWARM-LEARNING](EGO-SWARM-LEARNING.md)
 
 参考链接
 - Fast-drone/...
@@ -235,4 +206,32 @@ python multirotor_keyboard_control.py solo 1 vel
 
 
 ## VINS 深度相机内参标定
+
+## 参考链接
+
+这里是 PX 4 官方文档的资料
+- [PX4 文档主页 (px-4.com)](https://px-4.com/main/index.html)
+- [PX4 文档教程 (px-4.com)](https://px-4.com/main/en/getting_started/px4_basic_concepts.html)
+- [PX4 自动驾驶用户指南 (v1.13)](https://docs.px4.io/v1.13/zh/)
+- [使用 PX4-SDK 来控制 PX4](https://docs.px4.io/main/zh/modules/hello_sky.html)
+	- [针对不同平台编译 PX4 代码](https://docs.px4.io/main/zh/dev_setup/building_px4.html#gazebo-classic)
+- [编写 ROS 包通过 MAVROS 控制 Offboard 模式的 PX4](https://docs.px4.io/main/zh/ros/mavros_offboard_cpp.html)
+	- [PX4-ROS-Gazebo 联合仿真](https://docs.px4.io/main/zh/simulation/ros_interface.html)
+
+这里是 XTDrone 官方文档资料和仓库
+- [XTDrone + PX4 1.13 版本 使用文档（Beta测试版） (yuque.com)](https://www.yuque.com/xtdrone/manual_cn/install_scripts)
+- [robin-shaun/XTDrone: UAV Simulation Platform based on PX4, ROS and Gazebo (github.com)](https://github.com/robin-shaun/XTDrone)
+
+使用 XTDrone 平台进行 PX 4-ROS 仿真部分参考的的视频链接
+- [XTDrone 第4讲：键盘控制代码精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1jJ46eiEDJ/?spm_id_from=333.880.my_history.page.click&vd_source=9c85d181a345808c304a6fa2780bb4da)
+
+一个基于 XTDrone 移植 EGO-Swarm 到到 PX 4-ROS 的 github 工程
+- [XXLiu-HNU/Fast-Drone-250-v2: autonomous drone for Gazebo simulation (github.com)](https://github.com/XXLiu-HNU/Fast-Drone-250-v2)
+
+在使用 XTDrone 时会遇到的一些 trouble shooting
+- [Command ‘python‘ not found, did you mean: command ‘python3‘ from deb -CSDN](https://blog.csdn.net/m0_66238629/article/details/128681069)
+- [ROS:ModuleNotFoundError: No module named ‘rospkg‘ -CSDN](https://blog.csdn.net/qq_42995327/article/details/119357775)
+
+可能有用的 blog
+- [AcmeUav (zenglong.xyz)](http://zenglong.xyz/page/3/#blog)
 
