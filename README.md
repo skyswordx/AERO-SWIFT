@@ -60,7 +60,9 @@ FOR IARC
 	- [openwrt-batman-tutorial](https://github.com/benkay86/openwrt-batman-tutorial)
 	- [在 VMWare 中安装 OpenWrt | Shepherd's Blog](https://shepherd-xie.github.io/2024/09/26/deploy-openwrt-on-vmware/)
 - [D435i配置教程](./document/D435i-tutorial/D435i-tutorial.md)
-- [妙算 manifold-2C 配置经验]()
+- [妙算 manifold-2C 配置经验](./document/Manifold-2C-Setup/Manifold-2C-Setup.md)
+- IARC 任务规则细谈
+	- 中文省流 [Rules](document/IARC-Rules/Rules.md)
 
 ## 💖 编写注意事项
 
