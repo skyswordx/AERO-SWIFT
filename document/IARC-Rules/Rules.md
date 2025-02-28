@@ -1,5 +1,13 @@
 
-# IARC 规则更新记录
+# IARC 官方规则
+
+## 必看关键点
+
+飞机重量限制在 1 磅以下
+- 妙算约 205 g
+- 飞控 39.2 g
+- [x]  M9N GPS 32 g
+- 完整 D 435i 75 g
 
 ## SCENARIO ASSUMPTIONS
 
