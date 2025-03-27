@@ -33,3 +33,24 @@ Date:2025.2.7
 ```
 
 
+## Fast-Drone 调参
+
+启动文件
+- 地图大小
+- 膨胀和分辨率
+- 最大速度
+
+px4ctrl 的 config 文件
+- 实际飞机参数
+- 遥控通道是不是反的
+- `hover_percentage` 自动收敛的值
+
+## 参考链接
+
+- [Longer95479/Fast-Drone-XI35](https://github.com/Longer95479/Fast-Drone-XI35?tab=readme-ov-file#5-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91%E4%B8%8E%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B)
+- [高飞组-PX4控制器讨论及分析 - 知乎](https://zhuanlan.zhihu.com/p/638635777)
+- [aphasiayc/px4ctrl: Fork from ZJU-FAST-LAB/Fast-Drone-250](https://github.com/aphasiayc/px4ctrl?tab=readme-ov-file#%E6%8F%90%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%80%BB%E7%BB%93)
+- [【东北大学REAL实验室】自主无人机组装教学视频 - 4 PX4_Ctrl FSM讲解与真机定点飞行_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV11i421y7ta/?vd_source=a901441d2c723973826f98ab4b1463a5)
+- [NEU-REAL/REAL_DRONE_400: An open source Drone Suite for Aerial Robot](https://github.com/NEU-REAL/REAL_DRONE_400) 
+- 
+
